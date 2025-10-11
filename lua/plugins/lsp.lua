@@ -7,7 +7,7 @@ return {
             "neovim/nvim-lspconfig",
         },
         opts = {
-            ensure_installed = { "pyright", "cssls", "html", "bashls", "jsonls", "kotlin_language_server", "jdtls", "lua_ls", "nil_ls" },
+            ensure_installed = { "pyright", "cssls", "html", "bashls", "jsonls", "kotlin_language_server", "lua_ls", "nil_ls", "ruff" },
         },
     },
     {
@@ -19,8 +19,23 @@ return {
                     local client = vim.lsp.get_client_by_id(args.data.client_id)
                     if client and client.server_capabilities.inlayHintProvider then
                         vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+                        vim.lsp.inlay_hint.enable(false)
                     end
                 end,
+            })
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
+                callback = function(args)
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    if client == nil then
+                        return
+                    end
+                    if client.name == 'ruff' then
+                        -- Disable hover in favor of Pyright
+                        client.server_capabilities.hoverProvider = false
+                    end
+                end,
+                desc = 'LSP: Disable hover capability from Ruff',
             })
             -- vim.diagnostic.config(
             --     {
@@ -30,12 +45,12 @@ return {
             -- )
             vim.diagnostic.config({
                 virtual_text = {
-                    spacing = 4,
+                    spacing = 2, -- 4
                     prefix = "■", -- or ">>", "●", etc.
                 },
                 signs = true,
                 underline = true,
-                update_in_insert = false,
+                update_in_insert = true, -- false
                 severity_sort = true,
             })
         end,
@@ -62,12 +77,23 @@ return {
         "stevearc/conform.nvim",
         config = function()
             require("conform").setup({
-                format_on_save = {
-                    timeout_ms = 500,
-                    lsp_fallback = true,
-                },
+                -- format_on_save = {
+                --     timeout_ms = 500,
+                --     lsp_fallback = true,
+                -- },
                 formatters_by_ft = {
                     nix = { "nixpkgs_fmt" }, -- or "alejandra"
+                    python = {
+                        -- To fix auto-fixable lint errors.
+                        "ruff_fix",
+                        -- To run the Ruff formatter.
+                        "ruff_format",
+                        -- To organize the imports.
+                        "ruff_organize_imports",
+                    },
+                    markdown = {
+                        "prettierd", "prettier"
+                    }
                 },
             })
         end

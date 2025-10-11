@@ -29,9 +29,10 @@ return {
             ["<C-k>"] = { "select_prev", "fallback" },
             ["<C-j>"] = { "select_next", "fallback" },
             ["<C-CR>"] = { "select_and_accept", "fallback" },
+            ["<C-e>"] = { "show", "cancel" },
             -- -- Scroll documentation
-            -- ["<C-b>"] = { "scroll_documentation_up", "fallback" },
-            -- ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+            ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+            ["<C-d>"] = { "scroll_documentation_down", "fallback" },
             -- -- Show/hide signature
             -- ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
         },

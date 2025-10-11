@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.completion_enabled = true
 require("options")
 require("keymaps")
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

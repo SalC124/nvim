@@ -29,3 +29,13 @@ vim.keymap.set("n", "<leader>l", "<C-w>l", { desc = "right" })
 
 vim.keymap.set("n", "<leader>L", "<cmd>tabnext<cr>", { desc = "right" })
 vim.keymap.set("n", "<leader>H", "<cmd>tabprevious<cr>", { desc = "right" })
+
+-- ui
+
+local function toggle_inlay_hints()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end
+
+vim.keymap.set("n", "<leader>ih", toggle_inlay_hints, { desc = "Toggle Inlay Hints" })
+vim.keymap.set("n", "<leader>ic", "<cmd>ColorizerToggle<cr>", { desc = "colorize" })
+-- check blink-togl.lua
