@@ -1,7 +1,7 @@
 -- Hint: use `:h <option>` to figure out the meaning if needed
 vim.opt.clipboard = "unnamedplus" -- use system clipboard
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
--- vim.opt.mouse = 'a'                 -- allow the mouse to be used in Nvim
+vim.opt.mouse = 'a'                 -- allow the mouse to be used in Nvim
 
 -- Tab
 vim.opt.tabstop = 4      -- number of visual spaces per TAB
@@ -29,4 +29,3 @@ vim.opt.undofile = true
 vim.opt.updatetime = 32
 vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
-vim.opt.mouse = ""
