@@ -7,7 +7,7 @@ return {
             "neovim/nvim-lspconfig",
         },
         opts = {
-            ensure_installed = { "pyright", "cssls", "html", "bashls", "jsonls", "kotlin_language_server", "lua_ls", "nil_ls", "ruff" },
+            ensure_installed = { "pyright", "cssls", "html", "bashls", "jsonls", "kotlin_language_server", "lua_ls", "nil_ls", "ruff", "tinymist" },
         },
     },
     {
