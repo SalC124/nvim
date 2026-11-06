@@ -39,3 +39,6 @@ end
 vim.keymap.set("n", "<leader>ih", toggle_inlay_hints, { desc = "Toggle Inlay Hints" })
 vim.keymap.set("n", "<leader>ic", "<cmd>ColorizerToggle<cr>", { desc = "colorize" })
 -- check blink-togl.lua
+
+-- Use <Esc> to exit terminal mode and enter terminal-normal mode
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
